@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Damino’s Pizza</title>
+
+<!-- PWA -->
+<link rel="manifest" href="data:application/json,{
+  &quot;name&quot;:&quot;Damino’s Pizza&quot;,
+  &quot;short_name&quot;:&quot;Damino’s&quot;,
+  &quot;start_url&quot;:&quot;.&quot;,
+  &quot;display&quot;:&quot;standalone&quot;,
+  &quot;background_color&quot;:&quot;#ffffff&quot;,
+  &quot;theme_color&quot;:&quot;#e31837&quot;
+}">
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #fff;
+}
+header {
+  background: #e31837;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+}
+.section {
+  padding: 15px;
+}
+.card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 12px;
+}
+button {
+  background: #e31837;
+  color: white;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  border-radius: 8px;
+  font-size: 16px;
+}
+.hidden {
+  display: none;
+}
+.small {
+  font-size: 12px;
+  color: gray;
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<header>Damino’s Pizza 🍕</header>
+
+<div id="home" class="section">
+  <h3>Order Pizza Fast</h3>
+  <button onclick="goMenu()">ORDER NOW</button>
+</div>
+
+<div id="menu" class="section hidden">
+  <div class="card">
+    <h4>Margherita</h4>
+    <p>₹199</p>
+    <button onclick="add()">Add</button>
+  </div>
+  <div class="card">
+    <h4>Farmhouse</h4>
+    <p>₹299</p>
+    <button onclick="add()">Add</button>
+  </div>
+  <div class="card">
+    <h4>Pepper Paneer</h4>
+    <p>₹349</p>
+    <button onclick="goCart()">Go to Cart</button>
+  </div>
+</div>
+
+<div id="cart" class="section hidden">
+  <h3>Your Cart</h3>
+  <p>Total: ₹499</p>
+  <button onclick="placeOrder()">Place Order</button>
+</div>
+
+<div id="status" class="section hidden">
+  <h3 id="statusText">Order Confirmed ✅</h3>
+  <p>Your pizza is coming…</p>
+</div>
+
+<p class="small">Demo App — No real orders are placed</p>
+
+<script>
+function goMenu() {
+  home.classList.add("hidden");
+  menu.classList.remove("hidden");
+}
+function goCart() {
+  menu.classList.add("hidden");
+  cart.classList.remove("hidden");
+}
+function add() {
+  alert("Added to cart 🍕");
+}
+function placeOrder() {
+  cart.classList.add("hidden");
+  status.classList.remove("hidden");
+
+  const steps = [
+    "Order Confirmed ✅",
+    "Pizza is being prepared 👨‍🍳",
+    "Out for delivery 🚴",
+    "Almost there… ⏳"
+  ];
+
+  let i = 0;
+  setInterval(() => {
+    if (i < steps.length) {
+      statusText.innerText = steps[i];
+      i++;
+    }
+  }, 2000);
+}
+</script>
+
+</body>
+</html>
